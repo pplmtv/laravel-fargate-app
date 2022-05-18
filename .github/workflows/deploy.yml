@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Configure aws credentials for prod
+    - name: Configure aws credentials for prod
       # if: github.ref == 'refs/heads/main'
       uses: aws-actions/configure-aws-credentials@v1
       with:
