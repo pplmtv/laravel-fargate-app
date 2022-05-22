@@ -4,6 +4,7 @@ build:
 	docker-compose build --no-cache --force-rm
 laravel-install:
 	docker-compose exec app composer create-project --prefer-dist laravel/laravel .
+"laravel/laravel=8.*" .
 create-project:
 	mkdir backend
 	@make build
