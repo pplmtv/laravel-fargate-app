@@ -93,8 +93,8 @@ jobs:
         run: |
           docker build \
             --cache-from=$ECR_REGISTRY/$ECR_REPOSITRY:latest --build-arg BUILDKIT_INLINE_CACHE=1 . \
-            - f infra/docker/php/Dockerfile \
-            - t $ECR_REGISTRY/$ECR_REPOSITRY:latest \
-            - t $ECR_REGISTRY/$ECR_REPOSITRY:$IMAGE_TAG
+            -f infra/docker/php/Dockerfile \
+            -t $ECR_REGISTRY/$ECR_REPOSITRY:latest \
+            -t $ECR_REGISTRY/$ECR_REPOSITRY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITRY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITRY:$IMAGE_TAG
