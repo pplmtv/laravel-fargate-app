@@ -77,8 +77,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.amazon-ecr-login.outputs.registry }}
           ECR_REPOSITRY: ${{ env.SYSTEM_NAME }}-${{ env.ENV_NAME }}-${{ env.SERVICE_NAME }}-nginx
         run: |
-          docker build \
-            --cache-from=$ECR_REGISTRY/$ECR_REPOSITRY:latest --build-arg BUILDKIT_INLINE_CACHE=1 . \
+          docker build --cache-from=$ECR_REGISTRY/$ECR_REPOSITRY:latest --build-arg BUILDKIT_INLINE_CACHE=1 . \
             - f infra/docker/nginx/Dockerfile \
             - t $ECR_REGISTRY/$ECR_REPOSITRY:latest \
             - t $ECR_REGISTRY/$ECR_REPOSITRY:$IMAGE_TAG
@@ -91,8 +90,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.amazon-ecr-login.outputs.registry }}
           ECR_REPOSITRY: ${{ env.SYSTEM_NAME }}-${{ env.ENV_NAME }}-${{ env.SERVICE_NAME }}-php
         run: |
-          docker build \
-            --cache-from=$ECR_REGISTRY/$ECR_REPOSITRY:latest --build-arg BUILDKIT_INLINE_CACHE=1 . \
+          docker build --cache-from=$ECR_REGISTRY/$ECR_REPOSITRY:latest --build-arg BUILDKIT_INLINE_CACHE=1 . \
             - f infra/docker/php/Dockerfile \
             - t $ECR_REGISTRY/$ECR_REPOSITRY:latest \
             - t $ECR_REGISTRY/$ECR_REPOSITRY:$IMAGE_TAG
