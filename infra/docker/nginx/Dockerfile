@@ -8,6 +8,8 @@ ENV TZ=UTC
 RUN apk update && \
   apk add --update --no-cache --virtual=.build-dependencies g++
 
+RUN npm install --location=global npm@8.13.1
+
 # node command
 COPY --from=node /usr/local/bin /usr/local/bin
 # npm command

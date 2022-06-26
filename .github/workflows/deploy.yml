@@ -49,7 +49,6 @@ jobs:
 
       - run: docker-compose exec -T app composer install -n --prefer-dist --no-dev
 
-
         if: ${{ !steps.cache-composer.outputs.cache-hit }}
 
 
@@ -61,11 +60,11 @@ jobs:
           key: npm-v1-${{ hashFiles('backend/package-lock.json') }}
 
       - run: docker-compose exec -T web npm ci
+
         if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
 
-
       # - run: npm install -g npm@8.13.1
-      - run: docker-compose exec -T web npm run prod npm install -g npm@8.13.1
+      - run: docker-compose exec -T web npm run prod
 
 
       - uses: aws-actions/amazon-ecr-login@v1
