@@ -63,8 +63,8 @@ jobs:
 
         if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
 
-      - run: npm install --location=global npm@8.13.1 
-      - run: docker-compose exec -T web npm run prod
+      - run: npm install --location=global npm@8.13.1
+      - run: docker-compose exec -T web npm run prod npm install --location=global npm@8.13.1
 
       - uses: aws-actions/amazon-ecr-login@v1
         id: amazon-ecr-login
