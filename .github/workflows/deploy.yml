@@ -59,13 +59,12 @@ jobs:
           path: backend/node_modules
           key: npm-v1-${{ hashFiles('backend/package-lock.json') }}
 
-#      - run: docker-compose exec -T web npm ci
-      - run: docker-compose exec -T web npm install --location=global npm@8.13.1
+      - run: docker-compose exec -T web npm ci npm@8.13.1
+#      - run: docker-compose exec -T web npm install --location=global npm@8.13.1
 
 
 #        if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
 
-#      - run: npm install --location=global npm@8.13.1
       - run: docker-compose exec -T web npm run prod
 
       - uses: aws-actions/amazon-ecr-login@v1
