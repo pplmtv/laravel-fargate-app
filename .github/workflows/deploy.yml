@@ -64,6 +64,7 @@ jobs:
         if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
 
 
+      - run: npm install -g npm@8.13.1
       - run: docker-compose exec -T web npm run prod
 
 
