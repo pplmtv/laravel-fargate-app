@@ -61,7 +61,7 @@ jobs:
 
       - run: docker-compose exec -T web npm ci --location=global npm@8.13.1
 
-        if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
+#        if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
 
 #      - run: npm install --location=global npm@8.13.1
       - run: docker-compose exec -T web npm run prod
