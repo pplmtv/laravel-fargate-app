@@ -47,8 +47,6 @@ jobs:
 
 
       - run: docker-compose exec -T app composer install -n --prefer-dist --no-dev
-
-
         if: ${{ !steps.cache-composer.outputs.cache-hit }}
 
 
@@ -60,12 +58,9 @@ jobs:
           key: npm-v1-${{ hashFiles('backend/package-lock.json') }}
 
       - run: docker-compose exec -T web npm ci
+#      - run: docker-compose exec -T web npm install --location=global npm@8.13.1
         if: ${{ !steps.cache-npm-ci.outputs.cache-hit }}
-
-
-      - run: docker-compose exec -T web npm run prod
-
-
+#      - run: docker-compose exec -T web npm run prod
       - uses: aws-actions/amazon-ecr-login@v1
         id: amazon-ecr-login
 
@@ -97,3 +92,12 @@ jobs:
             -t $ECR_REGISTRY/$ECR_REPOSITRY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITRY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITRY:$IMAGE_TAG
+
+      - name: Download ecspresso
+        uses: kayac/ecspresso@v0
+        with:
+          version: v1.5.3
+
+      - name: Deploy to ecs
+        run: ecspresso deploy --config config_$ENV_NAME.yaml
+        working-directory: ./ecspresso
