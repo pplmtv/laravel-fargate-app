@@ -3,7 +3,7 @@ cluster: example-prod-foobar
 service: example-prod-foobar
 service_definition: ecs-service-def.json
 task_definition: ecs-task-def.json
-timeout: 10m0s
+timeout: 20m0s
 plugins:
   - name: tfstate
     config:
