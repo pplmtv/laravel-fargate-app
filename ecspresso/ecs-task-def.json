@@ -2,7 +2,18 @@
   "containerDefinitions": [
     {
       "cpu": 0,
-      "environment": [],
+      "dependsOn": [
+        {
+          "condition": "START",
+          "containerName": "php"
+        }
+      ],
+      "environment": [
+        {
+          "name": "VPC_CIDR",
+          "value": "{{ must_env `VPC_CIDR` }}"
+        }
+      ],
       "essential": true,
       "image": "{{ tfstate `data.aws_ecr_repository.nginx.repository_url` }}:{{ must_env `IMAGE_TAG` }}",
       "logConfiguration": {
@@ -66,12 +77,6 @@
         {
           "name": "DB_PASSWORD",
           "valueFrom": "/{{ must_env `SYSTEM_NAME` }}/{{ must_env `ENV_NAME` }}/{{ must_env `SERVICE_NAME` }}/DB_PASSWORD"
-        }
-      ],
-      "environment": [
-        {
-          "name": "VPC_CIDR",
-          "value": "{{ must_env `VPC_CIDR` }}"
         }
       ],
       "volumesFrom": []
